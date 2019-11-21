@@ -55,18 +55,17 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener { viewModel.onCorrect()
-            updateWordText()
-        }
-        binding.skipButton.setOnClickListener { viewModel.onSkip()
-            updateWordText()
-        }
+        binding.correctButton.setOnClickListener { viewModel.onCorrect() }
+        binding.skipButton.setOnClickListener { viewModel.onSkip() }
 
         viewModel.score.observe(this, Observer {newScore->
             binding.scoreText.text = newScore.toString()
         })
 
-        updateWordText()
+        viewModel.word.observe(this, Observer {newWord->
+            binding.wordText.text = newWord.toString()
+        })
+
         return binding.root
 
     }
@@ -81,12 +80,6 @@ class GameFragment : Fragment() {
         findNavController(this).navigate(action)
     }
 
-    /** Methods for updating the UI **/
-
-    private fun updateWordText() {
-        binding.wordText.text = viewModel.word
-
-    }
 
 
 }
