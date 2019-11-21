@@ -66,6 +66,15 @@ class GameFragment : Fragment() {
             binding.wordText.text = newWord.toString()
         })
 
+        viewModel.gameFinished.observe(this, Observer {isGameFinished->
+            if(isGameFinished){
+                gameFinished()
+                viewModel.onGameFinishedComplete()
+            }else{
+                Log.d(this@GameFragment.javaClass.simpleName, "onCreateView: Game Not Finished...");
+            }
+        })
+
         return binding.root
 
     }
@@ -76,9 +85,12 @@ class GameFragment : Fragment() {
      * Called when the game is finished
      */
     private fun gameFinished() {
+        Log.d(this@GameFragment.javaClass.simpleName, "gameFinished: ");
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value?:0)
         findNavController(this).navigate(action)
     }
+
+
 
 
 
