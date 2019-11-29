@@ -100,7 +100,7 @@ class GameViewModel :ViewModel(){
         //Select and remove a word from the list
         if (wordList.isEmpty()) {
             resetList()
-            _word.value = wordList.removeAt(0)
+            //_word.value = wordList.removeAt(0)
         }
         _word.value = wordList.removeAt(0)
     }

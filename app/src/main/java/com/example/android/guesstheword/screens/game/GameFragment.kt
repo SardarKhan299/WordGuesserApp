@@ -56,6 +56,9 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
+        //binding.mygame = viewModel
+
+
         binding.correctButton.setOnClickListener { viewModel.onCorrect() }
         binding.skipButton.setOnClickListener { viewModel.onSkip() }
 
